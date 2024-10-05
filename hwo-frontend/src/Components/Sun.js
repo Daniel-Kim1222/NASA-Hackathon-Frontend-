@@ -1,12 +1,20 @@
-import React from "react";
-import { useLoader } from "@react-three/fiber";
+import React, {useRef} from "react";
+import { useLoader, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { Line, Text } from "@react-three/drei"; // Import Line and Text from drei
 import "@fontsource/press-start-2p";
 
 function Sun() {
+  const sunRef = useRef();
   const sunScale = 0.25; // Sun's radius set to 0.25 units
   const sunTexture = useLoader(THREE.TextureLoader, "/assets/sun.png");
+
+  // Rotate the Sun slightly
+  useFrame(() => {
+    if (sunRef.current) {
+      sunRef.current.rotation.y += 0.001; // Very slow rotation on Y-axis
+    }
+  });
 
   const glowColor = new THREE.Color("#faa04d");
 
@@ -20,7 +28,7 @@ function Sun() {
   return (
     <>
       {/* Sun Mesh */}
-      <mesh position={[0, 0, 99]}>
+      <mesh ref={sunRef} position={[0, 0, 99]}>
         <sphereGeometry args={[sunScale * 0.99, 100, 100]} />
         <meshBasicMaterial
           map={sunTexture}
