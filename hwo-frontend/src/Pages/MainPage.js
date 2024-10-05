@@ -36,6 +36,25 @@ function MainPage() {
     }, {});
   };
 
+  // Function to apply filters (passed to RightDrawer)
+  const applyFilters = (result) => {
+    // Parse the filtered_data field from the result
+  const parsedData = JSON.parse(result.filtered_data);
+
+  // Extract pl_name values
+  const plNames = parsedData.map((item) => item.pl_name);
+    // Filter the raw data using pl_name
+    const filtered = data.filter((exoplanet) =>
+      plNames.includes(exoplanet.pl_name)
+    );
+
+    // Group the filtered data by hostname
+    const groupedData = groupByHostname(filtered);
+
+    // Update the filtered data
+    setFilteredData(groupedData);
+  };
+
   return (
     <div>
       <LeftDrawer />
