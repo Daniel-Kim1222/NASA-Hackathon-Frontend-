@@ -9,7 +9,7 @@ function Sun() {
   const sunScale = 0.25; // Sun's radius set to 0.25 units
   const sunTexture = useLoader(
     THREE.TextureLoader,
-    `${process.env.PUBLIC_URL}/assets/sun.png`
+    `${process.env.PUBLIC_URL}/assets/images/sun.png`
   );
 
   // Rotate the Sun slightly
@@ -23,7 +23,7 @@ function Sun() {
 
   // Line points for the white line near the Sun
   const linePoints = [
-    [0, 0, 99], // Start of the line at the center of the Sun
+    [0.06, 0.06, 99], // Start of the line at the center of the Sun
     [0.5, 0.5, 99], // End of the line (slightly offset to the right)
     [0.75, 0.5, 99],
   ];

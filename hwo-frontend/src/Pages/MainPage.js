@@ -65,7 +65,7 @@ function MainPage() {
     <div>
       {!isLeftDrawerOpen && (
         <img
-          src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+          src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
           alt="Logo"
           style={{
             position: "absolute",

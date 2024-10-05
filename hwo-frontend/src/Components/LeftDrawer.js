@@ -78,7 +78,7 @@ function LeftDrawer({ onToggle }) {
                 transform="translateX(-50%)"
               >
                 <img
-                  src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+                  src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
                   alt="Logo"
                   style={{ width: "150px", height: "150px" }}
                 />
@@ -185,10 +185,20 @@ function LeftDrawer({ onToggle }) {
               TEAM GRIT FORCE
             </Text>
             <Box display="flex" width="100%">
-              <Box width="75%" pr={2}></Box>
-              <Box width="25%" pr={10} opacity={0.2}>
+              <Box width="70%" pr={5}>
                 <img
-                  src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+                  src={`${process.env.PUBLIC_URL}/assets/images/team.png`}
+                  alt="Group Photo"
+                  style={{
+                    filter: "grayscale(100%)",
+                    width: "100%",
+                    height: "auto",
+                  }}
+                />
+              </Box>
+              <Box width="30%" pr={10} opacity={0.2}>
+                <img
+                  src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
                   alt="Logo"
                   style={{ width: "100%", height: "auto" }}
                 />
