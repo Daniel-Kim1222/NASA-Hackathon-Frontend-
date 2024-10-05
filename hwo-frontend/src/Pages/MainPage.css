@@ -1,0 +1,5 @@
+/* Set the initial scale to 50% */
+.exoplanet-preview {
+  transform: scale(0.5);
+  transition: transform 0.2s ease-out;
+}
