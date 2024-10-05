@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/NASA-Hackathon-Frontend-/static/css/main.d3073173.css",
-    "main.js": "/NASA-Hackathon-Frontend-/static/js/main.2d380c01.js",
-    "static/js/206.40be6a9b.chunk.js": "/NASA-Hackathon-Frontend-/static/js/206.40be6a9b.chunk.js",
-    "static/media/press-start-2p-latin-400-normal.woff2": "/NASA-Hackathon-Frontend-/static/media/press-start-2p-latin-400-normal.efa4fd449b33df426d63.woff2",
-    "static/media/press-start-2p-latin-ext-400-normal.woff2": "/NASA-Hackathon-Frontend-/static/media/press-start-2p-latin-ext-400-normal.b27a48529cd27ca61884.woff2",
-    "static/media/press-start-2p-cyrillic-400-normal.woff2": "/NASA-Hackathon-Frontend-/static/media/press-start-2p-cyrillic-400-normal.8ff2f96326994bf82403.woff2",
-    "static/media/press-start-2p-cyrillic-ext-400-normal.woff2": "/NASA-Hackathon-Frontend-/static/media/press-start-2p-cyrillic-ext-400-normal.3f07e4fb28b05927ecf1.woff2",
-    "static/media/press-start-2p-greek-400-normal.woff2": "/NASA-Hackathon-Frontend-/static/media/press-start-2p-greek-400-normal.3acde80c5447f629f3c7.woff2",
-    "static/media/press-start-2p-latin-400-normal.woff": "/NASA-Hackathon-Frontend-/static/media/press-start-2p-latin-400-normal.68e7552200733f63019b.woff",
-    "static/media/press-start-2p-latin-ext-400-normal.woff": "/NASA-Hackathon-Frontend-/static/media/press-start-2p-latin-ext-400-normal.84f0f463b89c3dd7ca7b.woff",
-    "static/media/press-start-2p-cyrillic-400-normal.woff": "/NASA-Hackathon-Frontend-/static/media/press-start-2p-cyrillic-400-normal.f816e124dbc513bee81a.woff",
-    "static/media/press-start-2p-cyrillic-ext-400-normal.woff": "/NASA-Hackathon-Frontend-/static/media/press-start-2p-cyrillic-ext-400-normal.d6e8f891ba8acb97894d.woff",
-    "static/media/press-start-2p-greek-400-normal.woff": "/NASA-Hackathon-Frontend-/static/media/press-start-2p-greek-400-normal.a2a5944f91d5da4fd2b8.woff",
-    "index.html": "/NASA-Hackathon-Frontend-/index.html"
+    "main.css": "/static/css/main.c05168f9.css",
+    "main.js": "/static/js/main.d08f5c20.js",
+    "static/js/206.40be6a9b.chunk.js": "/static/js/206.40be6a9b.chunk.js",
+    "static/media/press-start-2p-latin-400-normal.woff2": "/static/media/press-start-2p-latin-400-normal.efa4fd449b33df426d63.woff2",
+    "static/media/press-start-2p-latin-ext-400-normal.woff2": "/static/media/press-start-2p-latin-ext-400-normal.b27a48529cd27ca61884.woff2",
+    "static/media/press-start-2p-cyrillic-400-normal.woff2": "/static/media/press-start-2p-cyrillic-400-normal.8ff2f96326994bf82403.woff2",
+    "static/media/press-start-2p-cyrillic-ext-400-normal.woff2": "/static/media/press-start-2p-cyrillic-ext-400-normal.3f07e4fb28b05927ecf1.woff2",
+    "static/media/press-start-2p-greek-400-normal.woff2": "/static/media/press-start-2p-greek-400-normal.3acde80c5447f629f3c7.woff2",
+    "static/media/press-start-2p-latin-400-normal.woff": "/static/media/press-start-2p-latin-400-normal.68e7552200733f63019b.woff",
+    "static/media/press-start-2p-latin-ext-400-normal.woff": "/static/media/press-start-2p-latin-ext-400-normal.84f0f463b89c3dd7ca7b.woff",
+    "static/media/press-start-2p-cyrillic-400-normal.woff": "/static/media/press-start-2p-cyrillic-400-normal.f816e124dbc513bee81a.woff",
+    "static/media/press-start-2p-cyrillic-ext-400-normal.woff": "/static/media/press-start-2p-cyrillic-ext-400-normal.d6e8f891ba8acb97894d.woff",
+    "static/media/press-start-2p-greek-400-normal.woff": "/static/media/press-start-2p-greek-400-normal.a2a5944f91d5da4fd2b8.woff",
+    "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.d3073173.css",
-    "static/js/main.2d380c01.js"
+    "static/css/main.c05168f9.css",
+    "static/js/main.d08f5c20.js"
   ]
 }
