@@ -1,0 +1,8 @@
+1. Below is the Homepage route for deployment on GitHub Pages.  Add this to package.json right above "dependencies"
+"homepage": "https://Daniel-Kim1222.github.io/NASA-Hackathon-Frontend-/"
+
+2. Commit and push to main repo
+
+3. npm run deploy
+
+
