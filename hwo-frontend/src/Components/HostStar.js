@@ -4,15 +4,15 @@ import * as THREE from "three";
 import { useLoader } from "@react-three/fiber";
 
 const texturePaths = [
-  "/assets/noises/noiseTexture1.png",
-  "/assets/noises/noiseTexture2.png",
-  "/assets/noises/noiseTexture3.png",
-  "/assets/noises/noiseTexture4.png",
-  "/assets/noises/noiseTexture5.png",
-  "/assets/noises/noiseTexture6.png",
-  "/assets/noises/noiseTexture7.png",
-  "/assets/noises/noiseTexture8.png",
-];
+    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture1.png`,
+    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture2.png`,
+    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture3.png`,
+    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture4.png`,
+    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture5.png`,
+    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture6.png`,
+    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture7.png`,
+    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture8.png`,
+  ];
 
 function HostStar({ system, onClick, isSelected }) {
   const { starData } = system;

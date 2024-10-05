@@ -5,6 +5,7 @@ import HostStar from "./HostStar";
 import Exoplanet from "./Exoplanet";
 import Sun from "./Sun";
 import ControlPanel from "./ControlPanel";
+import { Text } from "@react-three/drei";
 
 function ExoplanetVisualization({ data }) {
   const [zoomValue, setZoomValue] = useState(2900);
@@ -57,14 +58,14 @@ function ExoplanetVisualization({ data }) {
     setRotateYValue(0);
   };
 
-   // Mouse down event to start dragging
-   const handleMouseDown = (event) => {
+  // Mouse down event to start dragging
+  const handleMouseDown = (event) => {
     setIsDragging(true);
     setLastMousePosition({ x: event.clientX, y: event.clientY });
   };
 
-   // Mouse move event to rotate the view while dragging
-   const handleMouseMove = (event) => {
+  // Mouse move event to rotate the view while dragging
+  const handleMouseMove = (event) => {
     if (!isDragging) return;
 
     const deltaX = event.clientX - lastMousePosition.x;
@@ -97,7 +98,6 @@ function ExoplanetVisualization({ data }) {
     updateCamera();
   }, [zoomValue, rotateXValue, rotateYValue, updateCamera]);
 
-
   return (
     <>
       <Canvas
@@ -128,9 +128,7 @@ function ExoplanetVisualization({ data }) {
           )
           .map((system, systemIndex) => (
             <React.Fragment key={systemIndex}>
-              <HostStar
-                system={system}
-              />
+              <HostStar system={system} />
               {system.exoplanets.map((planet, planetIndex) => (
                 <Exoplanet
                   key={`${system.starData.hostname}-${planetIndex}`}
@@ -147,6 +145,16 @@ function ExoplanetVisualization({ data }) {
           ))}
         {/* Render the Sun */}
         <Sun />
+        <Text
+          position={[0.77, 0.5, 99]}
+          fontSize={0.1}
+          color="white"
+          anchorX="right"
+          anchorY="middle"
+          font={`${process.env.PUBLIC_URL}/assets/PressStart2P-Regular.ttf`}
+        >
+          THE MILKY WAY GALAXY
+        </Text>
       </Canvas>
       <ControlPanel
         zoomValue={zoomValue}

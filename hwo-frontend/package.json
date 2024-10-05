@@ -2,7 +2,7 @@
   "name": "hwo-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Daniel-Kim1222.github.io/NASA-Hackathon-Frontend-",
+  "homepage": "https://Daniel-Kim1222.github.io/NASA-Hackathon-Frontend-/",
   "dependencies": {
     "@chakra-ui/react": "^2.10.1",
     "@fontsource/press-start-2p": "^5.1.0",
@@ -20,7 +20,7 @@
   "scripts": {
     "start": "GENERATE_SOURCEMAP=false react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
-    "predeploy": "npm run build", 
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -44,6 +44,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1"
+    "gh-pages": "^6.1.1",
+    "prettier": "^3.3.3"
   }
 }

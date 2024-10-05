@@ -1,13 +1,13 @@
 import React, {useRef} from "react";
 import { useLoader, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { Line, Text } from "@react-three/drei"; // Import Line and Text from drei
+import { Line, Text } from "@react-three/drei"; 
 import "@fontsource/press-start-2p";
 
 function Sun() {
   const sunRef = useRef();
   const sunScale = 0.25; // Sun's radius set to 0.25 units
-  const sunTexture = useLoader(THREE.TextureLoader, "/assets/sun.png");
+  const sunTexture = useLoader(THREE.TextureLoader, `${process.env.PUBLIC_URL}/assets/sun.png`);
 
   // Rotate the Sun slightly
   useFrame(() => {
@@ -64,7 +64,7 @@ function Sun() {
         color="white" // Text color
         anchorX="left" // Align the text to the left of the position
         anchorY="middle"
-        font="/assets/PressStart2P-Regular.ttf"
+        font={`${process.env.PUBLIC_URL}/assets/PressStart2P-Regular.ttf`} 
       >
         SUN
       </Text>
