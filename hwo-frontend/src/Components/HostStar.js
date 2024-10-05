@@ -4,15 +4,15 @@ import * as THREE from "three";
 import { useLoader } from "@react-three/fiber";
 
 const texturePaths = [
-    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture1.png`,
-    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture2.png`,
-    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture3.png`,
-    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture4.png`,
-    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture5.png`,
-    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture6.png`,
-    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture7.png`,
-    `${process.env.PUBLIC_URL}/assets/noises/noiseTexture8.png`,
-  ];
+  `${process.env.PUBLIC_URL}/assets/noises/noiseTexture1.png`,
+  `${process.env.PUBLIC_URL}/assets/noises/noiseTexture2.png`,
+  `${process.env.PUBLIC_URL}/assets/noises/noiseTexture3.png`,
+  `${process.env.PUBLIC_URL}/assets/noises/noiseTexture4.png`,
+  `${process.env.PUBLIC_URL}/assets/noises/noiseTexture5.png`,
+  `${process.env.PUBLIC_URL}/assets/noises/noiseTexture6.png`,
+  `${process.env.PUBLIC_URL}/assets/noises/noiseTexture7.png`,
+  `${process.env.PUBLIC_URL}/assets/noises/noiseTexture8.png`,
+];
 
 function HostStar({ system, onClick, isSelected }) {
   const { starData } = system;
@@ -26,7 +26,7 @@ function HostStar({ system, onClick, isSelected }) {
     st_spectype_cleaned,
   } = starData;
 
-  const zOffset = 99; 
+  const zOffset = 97;
 
   const randomTexturePath = useMemo(() => {
     return texturePaths[Math.floor(Math.random() * texturePaths.length)];
@@ -43,7 +43,7 @@ function HostStar({ system, onClick, isSelected }) {
   }
 
   // Use the Cartesian coordinates directly
-  const position = [cartesian_x, cartesian_y, cartesian_z +zOffset];
+  const position = [cartesian_x, cartesian_y, cartesian_z + zOffset];
 
   // Adjust position scaling to fit the stars within the scene
   const positionScale = 1;
@@ -84,7 +84,7 @@ function HostStar({ system, onClick, isSelected }) {
       case "D":
         return new THREE.Color("#f0f0f0"); // White dwarfs (D-type)
       default:
-        return new THREE.Color("#c0c0c0"); // Bright grey as default color
+        return new THREE.Color("#8b8b89"); // Bright grey as default color
     }
   };
 
@@ -99,7 +99,7 @@ function HostStar({ system, onClick, isSelected }) {
     if (teff >= 2300) return new THREE.Color("#ff7043"); // M-type (orangish red)
     if (teff >= 1300) return new THREE.Color("#ff6347"); // L-type (red-brown)
     if (teff >= 550) return new THREE.Color("#8a5a44");
-    return new THREE.Color("#c0c0c0"); // Bright grey if null
+    return new THREE.Color("##8b8b89"); // Bright grey if null
   };
   // Get the star's color based on its temperature
   let specTypeColor = getSpectralTypeColor(st_spectype_cleaned);
@@ -114,21 +114,20 @@ function HostStar({ system, onClick, isSelected }) {
     <group position={scaledPosition}>
       {/* Host Star */}
       <mesh>
-  {/* Star geometry */}
-  <sphereGeometry args={[starSize * 1, 32, 32]} /> {/* Slightly larger size for the emissive glow effect */}
-  
-  {/* Combine the star's surface and glow into one material */}
-  <meshStandardMaterial
-    map={texture} // Texture of the star surface
-    color={starColor} // Base color of the star
-    emissive={starColor} // Use emissive color for the glow effect
-    emissiveMap={texture} // Emissive map if needed (or remove if unnecessary)
-    emissiveIntensity={5} // Stronger intensity for glow
-    transparent={true}
-    opacity={1} // Slight transparency
-  />
-</mesh>
-
+        {/* Star geometry */}
+        <sphereGeometry args={[starSize * 1, 32, 32]} />{" "}
+        {/* Slightly larger size for the emissive glow effect */}
+        {/* Combine the star's surface and glow into one material */}
+        <meshStandardMaterial
+          map={texture} // Texture of the star surface
+          color={starColor} // Base color of the star
+          emissive={starColor} // Use emissive color for the glow effect
+          emissiveMap={texture} // Emissive map if needed (or remove if unnecessary)
+          emissiveIntensity={5} // Stronger intensity for glow
+          transparent={true}
+          opacity={1} // Slight transparency
+        />
+      </mesh>
     </group>
   );
 }

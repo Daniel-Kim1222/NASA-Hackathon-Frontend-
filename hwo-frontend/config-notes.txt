@@ -1,4 +1,5 @@
 1. Below is the Homepage route for deployment on GitHub Pages.  Add this to package.json right above "dependencies"
+Remove it when working locally
 "homepage": "https://Daniel-Kim1222.github.io/NASA-Hackathon-Frontend-/"
 
 2. Commit and push to main repo

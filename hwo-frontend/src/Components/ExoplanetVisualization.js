@@ -53,7 +53,7 @@ function ExoplanetVisualization({ data }) {
   };
 
   const handleZoomOut = () => {
-    setZoomValue(2600);
+    setZoomValue(2200);
     setRotateXValue(0);
     setRotateYValue(0);
   };
@@ -102,7 +102,7 @@ function ExoplanetVisualization({ data }) {
     <>
       <Canvas
         camera={{
-          position: [10, 10, maxZoomValue - zoomValue],
+          position: [0, 0, maxZoomValue - zoomValue],
           fov: 70,
           near: 0.1,
           far: maxZoomValue + 1000,
@@ -146,14 +146,15 @@ function ExoplanetVisualization({ data }) {
         {/* Render the Sun */}
         <Sun />
         <Text
-          position={[0.77, 0.5, 99]}
-          fontSize={0.1}
-          color="white"
-          anchorX="right"
-          anchorY="middle"
+          position={[-485, 500, 0]}
+          fontSize={60}
+          color="#ffea2e"
+          anchorX="middle"
+          anchorY="top"
           font={`${process.env.PUBLIC_URL}/assets/PressStart2P-Regular.ttf`}
+          rotation={[6 * (Math.PI / 180), 0, 0.1 * (Math.PI / 180)]}
         >
-          THE MILKY WAY GALAXY
+          MILKY WAY GALAXY
         </Text>
       </Canvas>
       <ControlPanel

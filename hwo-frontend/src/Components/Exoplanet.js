@@ -14,7 +14,7 @@ function Exoplanet({ planet, starPosition, starSize }) {
 
   const planetRef = useRef();
 
-  const zOffset = 99; 
+  const zOffset = 97;
 
   // Define the same scaling factor used for stars
   const sunSize = 1;
