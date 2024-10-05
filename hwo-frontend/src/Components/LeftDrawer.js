@@ -6,14 +6,16 @@ import {
   DrawerBody,
   Box,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 
-function LeftDrawer() {
+function LeftDrawer({ onToggle }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSection, setSelectedSection] = useState(null); // Track the selected section
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
+    onToggle(!isOpen);
     if (isOpen) {
       setSelectedSection(null); // Close the section box when the drawer closes
     }
@@ -30,7 +32,7 @@ function LeftDrawer() {
         top="0"
         left="0"
         height="100vh"
-        width="50px" // Adjusted width for the closed drawer state
+        w="50px" // Adjusted width for the closed drawer state
         bg="brand.200"
         zIndex="1000"
         display={isOpen ? "none" : "flex"} // Hide the button when the drawer is open
@@ -38,6 +40,7 @@ function LeftDrawer() {
         alignItems="center"
         transition="width 0.3s ease" // Smooth transition between states
         opacity={0.9}
+        onClick={toggleDrawer}
       >
         {/* Triangle button */}
         <Box
@@ -67,22 +70,66 @@ function LeftDrawer() {
           <DrawerBody>
             <Box color="white" p={4}>
               {/* Content inside drawer */}
-              <Text
-                onClick={() => handleSectionClick("about")}
-                cursor="pointer"
-                fontWeight={selectedSection === "about" ? "bold" : "normal"} // Highlight when selected
-                mb={4}
+              {/* VStack to center the sections vertically */}
+              <Box
+                position="absolute"
+                top="75px"
+                left="50%"
+                transform="translateX(-50%)"
               >
-                About Us
-              </Text>
-              <Text
-                onClick={() => handleSectionClick("services")}
-                cursor="pointer"
-                fontWeight={selectedSection === "services" ? "bold" : "normal"} // Highlight when selected
-                mb={4}
+                <img
+                  src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+                  alt="Logo"
+                  style={{ width: "150px", height: "150px" }}
+                />
+              </Box>
+              <VStack
+                spacing={14}
+                align="center"
+                position="absolute"
+                top="50%"
+                left="50%"
+                transform="translate(-50%, -50%)"
               >
-                Our Services
-              </Text>
+                {/* Intro Section */}
+                <Text
+                  fontSize="xl"
+                  fontWeight="bold"
+                  color={
+                    selectedSection === "intro" ? "brand.600" : "brand.400"
+                  }
+                  onClick={() => handleSectionClick("intro")}
+                  cursor="pointer"
+                >
+                  INTRO
+                </Text>
+
+                {/* About Us */}
+                <Text
+                  fontSize="xl"
+                  fontWeight="bold"
+                  color={
+                    selectedSection === "about" ? "brand.600" : "brand.400"
+                  }
+                  onClick={() => handleSectionClick("about")}
+                  cursor="pointer"
+                >
+                  ABOUT US
+                </Text>
+
+                {/* References */}
+                <Text
+                  fontSize="xl"
+                  fontWeight="bold"
+                  color={
+                    selectedSection === "references" ? "brand.600" : "brand.400"
+                  }
+                  onClick={() => handleSectionClick("references")}
+                  cursor="pointer"
+                >
+                  REFERENCES
+                </Text>
+              </VStack>
               <Box
                 position="absolute"
                 right="0px" // Positioned inside the drawer
@@ -102,22 +149,76 @@ function LeftDrawer() {
       </Drawer>
 
       {/* New Box that opens to the right when a section is selected */}
-      {selectedSection && (
+      {selectedSection === "about" && (
         <Box
-          position="fixed"
+          position="absolute"
           top="0"
           left="375px"
           height="100vh"
-          width="600px"
+          width="1000px"
           bg="brand.300"
-          zIndex="1000"
+          zIndex="2000"
           p={4}
           color="white"
-          opacity={1}
+          opacity={0.9}
         >
-          {/* Display content based on the selected section */}
-          {selectedSection === "about" && <Text>About Us Content</Text>}
-          {selectedSection === "services" && <Text>Our Services Content</Text>}
+          {/* VStack for content */}
+          {/* Close button */}
+          <VStack spacing={6} align="start" mx="15px">
+            <Box
+              alignSelf="flex-end" // Align to the right
+              cursor="pointer"
+              onClick={() => setSelectedSection(null)}
+            >
+              <Text fontSize="4xl" fontWeight="bold" color="brand.500">
+                X
+              </Text>
+            </Box>
+
+            {/* Title */}
+            <Text
+              fontSize="3xl"
+              fontWeight="bold"
+              alignSelf="start"
+              color="brand.500"
+            >
+              TEAM GRIT FORCE
+            </Text>
+            <Box display="flex" width="100%">
+              <Box width="75%" pr={2}></Box>
+              <Box width="25%" pr={10} opacity={0.2}>
+                <img
+                  src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+                  alt="Logo"
+                  style={{ width: "100%", height: "auto" }}
+                />
+              </Box>
+            </Box>
+            <Text color="brand.400" fontSize="15px">
+              We are Team Grit Force, a group of passionate and determined
+              students ready to take on the NASA Space Apps Challenge. Our team
+              consists of six members, each bringing unique skills to the
+              project. <br /> <br />
+              Haejun Kim (Daniel) leads the team. He manages Miro and Slack,
+              sets priorities, and oversees the overall project direction. He
+              also refines the main project description. <br />
+              <br />
+              Jeongin Koo (Jane) and Chaewon Lim (Jennie) handle the design
+              work. They create the wireframes and UI using Figma. They also
+              design assets, manage the project slides, and work on the 3D user
+              experience.
+              <br />
+              <br />
+              Yumi Wada and Jungah Huh (Olivia) focus on research and data. They
+              collect, clean, and analyze data from NASA APIs using Python. They
+              also work on building data layers for our 3D model and help
+              develop the coding side of things. <br />
+              <br />
+              Noah Linseo Kim sets up the backend infrastructure. He integrates
+              data sources, manages the GitHub repository, and ensures the
+              frontend and backend work together smoothly.
+            </Text>
+          </VStack>
         </Box>
       )}
     </>

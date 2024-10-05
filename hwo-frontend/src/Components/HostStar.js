@@ -99,7 +99,7 @@ function HostStar({ system, onClick, isSelected }) {
     if (teff >= 2300) return new THREE.Color("#ff7043"); // M-type (orangish red)
     if (teff >= 1300) return new THREE.Color("#ff6347"); // L-type (red-brown)
     if (teff >= 550) return new THREE.Color("#8a5a44");
-    return new THREE.Color("##8b8b89"); // Bright grey if null
+    return new THREE.Color("#8b8b89"); // Bright grey if null
   };
   // Get the star's color based on its temperature
   let specTypeColor = getSpectralTypeColor(st_spectype_cleaned);

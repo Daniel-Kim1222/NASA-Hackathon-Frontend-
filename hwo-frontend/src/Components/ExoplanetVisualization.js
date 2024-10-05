@@ -148,11 +148,11 @@ function ExoplanetVisualization({ data }) {
         <Text
           position={[-485, 500, 0]}
           fontSize={60}
-          color="#ffea2e"
+          color="#feea2f"
           anchorX="middle"
           anchorY="top"
           font={`${process.env.PUBLIC_URL}/assets/PressStart2P-Regular.ttf`}
-          rotation={[6 * (Math.PI / 180), 0, 0.1 * (Math.PI / 180)]}
+          rotation={[6 * (Math.PI / 180), 0, 0]}
         >
           MILKY WAY GALAXY
         </Text>

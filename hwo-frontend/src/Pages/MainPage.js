@@ -7,6 +7,7 @@ import RightDrawer from "../Components/RightDrawer";
 function MainPage() {
   const [data, setData] = useState({});
   const [filteredData, setFilteredData] = useState([]);
+  const [isLeftDrawerOpen, setIsLeftDrawerOpen] = useState(false);
 
   useEffect(() => {
     // Fetch initial data (ungrouped)
@@ -39,10 +40,10 @@ function MainPage() {
   // Function to apply filters (passed to RightDrawer)
   const applyFilters = (result) => {
     // Parse the filtered_data field from the result
-  const parsedData = JSON.parse(result.filtered_data);
+    const parsedData = JSON.parse(result.filtered_data);
 
-  // Extract pl_name values
-  const plNames = parsedData.map((item) => item.pl_name);
+    // Extract pl_name values
+    const plNames = parsedData.map((item) => item.pl_name);
     // Filter the raw data using pl_name
     const filtered = data.filter((exoplanet) =>
       plNames.includes(exoplanet.pl_name)
@@ -55,9 +56,29 @@ function MainPage() {
     setFilteredData(groupedData);
   };
 
+  // Handle the LeftDrawer state to show/hide logo
+  const handleDrawerToggle = (isOpen) => {
+    setIsLeftDrawerOpen(isOpen);
+  };
+
   return (
     <div>
-      <LeftDrawer />
+      {!isLeftDrawerOpen && (
+        <img
+          src={`${process.env.PUBLIC_URL}/assets/logo.png`}
+          alt="Logo"
+          style={{
+            position: "absolute",
+            bottom: "10px",
+            left: "70px",
+            width: "150px",
+            height: "150px",
+            zIndex: 1000,
+            opacity: 0.9,
+          }}
+        />
+      )}
+      <LeftDrawer onToggle={handleDrawerToggle} />
       <ExoplanetVisualization data={filteredData} />
       <RightDrawer applyFilters={applyFilters} />
     </div>
