@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Drawer,
   DrawerOverlay,
@@ -10,39 +10,69 @@ import {
   SliderTrack,
   SliderFilledTrack,
   SliderThumb,
-  SliderMark,
+  VStack,
+  Text,
+  Tooltip,
+  HStack,
 } from "@chakra-ui/react";
 
 function RightDrawer({ applyFilters }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [maxDistance, setMaxDistance] = useState(20); // Default value for max distance
+  // State for each filter
+  const [maxDistance, setMaxDistance] = useState(null);
+  const [wavelength, setWavelength] = useState(null);
+  const [esi, setEsi] = useState(null);
+  const [discoveryMethod, setDiscoveryMethod] = useState(null);
+  const [telescopeDiameter, setTelescopeDiameter] = useState(null);
 
   // Toggle Drawer
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
   };
 
-  // Handle API call to filter by distance
+  // Handle API call to apply filters
   const handleApplyFilters = async () => {
+    const payload = {};
+
+    if (maxDistance !== null) payload.max_distance = maxDistance;
+    if (telescopeDiameter !== null)
+      payload.telescope_diameter = telescopeDiameter;
+    if (wavelength !== null) payload.wavelength = wavelength;
+    if (esi !== null) payload.esi_threshold = esi;
+    if (discoveryMethod !== null) payload.discovery_method = discoveryMethod;
+
+    // If all filters are null, default max_distance to 8600
+    if (
+      maxDistance === null &&
+      wavelength === null &&
+      esi === null &&
+      discoveryMethod === null &&
+      telescopeDiameter === null
+    ) {
+      payload.max_distance = 8600;
+    }
+
     try {
-      const response = await fetch('http://localhost:8000/api/data/filter/distance', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          max_distance: maxDistance,
-        }),
-      });
+      const response = await fetch(
+        "https://peaceful-atoll-81477-9628d63c0d01.herokuapp.com/api/data/filter/combined",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error('Error fetching filtered data');
+        throw new Error("Error fetching filtered data");
       }
 
       const result = await response.json();
+      console.log(result);
       applyFilters(result);
     } catch (err) {
-      console.error('Error applying filters:', err);
+      console.error("Error applying filters:", err);
     }
   };
 
@@ -90,29 +120,77 @@ function RightDrawer({ applyFilters }) {
         <DrawerContent bg="brand.200" opacity={0.9}>
           <DrawerBody>
             <Box color="white" p={4}>
-              {/* Max Distance Slider */}
-              <p>Maximum Distance (in light-years)</p>
-              <Slider
-                defaultValue={20}
-                min={0}
-                max={1000}
-                step={10}
-                onChange={(value) => setMaxDistance(value)}
-                mb={4}
-              >
-                <SliderMark value={maxDistance} mt="-10" ml="-2.5" fontSize="sm">
-                  {maxDistance}
-                </SliderMark>
-                <SliderTrack>
-                  <SliderFilledTrack />
-                </SliderTrack>
-                <SliderThumb />
-              </Slider>
-
-              {/* Button to apply filters */}
-              <Button colorScheme="teal" onClick={handleApplyFilters}>
-                Apply Filters
-              </Button>
+              <VStack>
+                <Box my={5}>
+                  <Text align="center" fontSize="xl" color="brand.500">
+                    Observation Control
+                  </Text>
+                </Box>
+                {/* Max Distance Slider */}
+                <Box>
+                  <Text align="center" fontSize="sm" color="brand.400">
+                    Maximum Distance(parcecs)
+                  </Text>
+                  <Slider
+                    defaultValue={0}
+                    min={0}
+                    max={8500}
+                    step={25}
+                    onChange={(value) => setMaxDistance(value)}
+                    my={2}
+                  >
+                    <SliderTrack bg="brand.700" height="8px">
+                      <SliderFilledTrack bg="brand.600" />
+                    </SliderTrack>
+                    <Tooltip label={`Max Distance: ${maxDistance}`} hasArrow>
+                      <SliderThumb boxSize={4} bg="brand.500" />
+                    </Tooltip>
+                  </Slider>
+                </Box>
+                <HStack w="100%">
+                  <Button
+                    color={"brand.700"}
+                    backgroundColor={"brand.500"}
+                    onClick={handleApplyFilters}
+                    fontSize={"md"}
+                  >
+                    Apply
+                  </Button>
+                  <Button
+                    fontSize={"md"}
+                    color={"brand.700"}
+                    backgroundColor={"brand.500"}
+                    onClick={() => {
+                      setMaxDistance(null);
+                      handleApplyFilters();
+                    }}
+                  >
+                    Reset
+                  </Button>
+                </HStack>
+                {/* Telescope & Diameter Slider */}
+                <HStack w="100%">
+                  <Button
+                    color={"brand.700"}
+                    backgroundColor={"brand.500"}
+                    onClick={handleApplyFilters}
+                    fontSize={"md"}
+                  >
+                    Apply
+                  </Button>
+                  <Button
+                    fontSize={"md"}
+                    color={"brand.700"}
+                    backgroundColor={"brand.500"}
+                    onClick={() => {
+                      setMaxDistance(null);
+                      handleApplyFilters();
+                    }}
+                  >
+                    Reset
+                  </Button>
+                </HStack>
+              </VStack>
 
               {/* Triangle button inside drawer */}
               <Box

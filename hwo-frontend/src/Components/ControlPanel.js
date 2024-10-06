@@ -42,7 +42,6 @@ function ControlPanel({
           Zoom
         </Text>
         <Slider
-          aria-label="zoom-slider"
           value={zoomValue}
           min={minZoomValue}
           max={maxZoomValue}
@@ -60,12 +59,12 @@ function ControlPanel({
 
         {/* Reset Button */}
         <HStack>
-        <Button bgColor={"brand.500"} color={"brand.700"} onClick={onReset}>
-          Reset
-        </Button>
-        <Button bgColor={"brand.500"} color={"brand.700"} onClick={onZoomOut}>
-          Zoom Out
-        </Button>
+          <Button bgColor={"brand.500"} color={"brand.700"} onClick={onReset}>
+            Reset
+          </Button>
+          <Button bgColor={"brand.500"} color={"brand.700"} onClick={onZoomOut}>
+            Zoom Out
+          </Button>
         </HStack>
       </VStack>
     </Box>

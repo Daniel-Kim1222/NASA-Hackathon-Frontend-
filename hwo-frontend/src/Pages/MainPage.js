@@ -51,6 +51,7 @@ function MainPage() {
 
     // Group the filtered data by hostname
     const groupedData = groupByHostname(filtered);
+    console.log("here");
 
     // Update the filtered data
     setFilteredData(groupedData);
