@@ -16,9 +16,10 @@ import {
   HStack,
   Select,
   Divider,
+  Switch,
 } from "@chakra-ui/react";
 
-function RightDrawer({ applyFilters }) {
+function RightDrawer({ applyFilters, onToggleHostStars }) {
   const [isOpen, setIsOpen] = useState(false);
   // State for each filter
   const [maxDistance, setMaxDistance] = useState(0);
@@ -27,6 +28,7 @@ function RightDrawer({ applyFilters }) {
   const [discoveryMethod, setDiscoveryMethod] = useState("");
   const [telescopeDiameter, setTelescopeDiameter] = useState(0);
   const [shouldReset, setShouldReset] = useState(false);
+  const [showHostStars, setShowHostStars] = useState(true);
 
   useEffect(() => {
     if (shouldReset) {
@@ -71,7 +73,6 @@ function RightDrawer({ applyFilters }) {
       payload.max_distance = 8600;
     }
     console.log(JSON.stringify(payload));
-
     try {
       const response = await fetch(
         "https://peaceful-atoll-81477-9628d63c0d01.herokuapp.com/api/data/filter/combined",
@@ -94,6 +95,11 @@ function RightDrawer({ applyFilters }) {
     } catch (err) {
       console.error("Error applying filters:", err);
     }
+  };
+
+  const handleToggleHostStars = () => {
+    setShowHostStars(!showHostStars); // Toggle visibility
+    onToggleHostStars(!showHostStars); // Pass the value up to MainPage
   };
 
   return (
@@ -141,7 +147,7 @@ function RightDrawer({ applyFilters }) {
           <DrawerBody>
             <Box color="white" p={4}>
               <VStack>
-                <Box my={5}>
+                <Box my={1}>
                   <Text align="center" fontSize="xl" color="brand.500">
                     Observation Control
                   </Text>
@@ -157,7 +163,7 @@ function RightDrawer({ applyFilters }) {
                     max={8500}
                     step={25}
                     onChange={(value) => setMaxDistance(value)}
-                    my={2}
+                    mt={2}
                   >
                     <SliderTrack bg="brand.700" height="8px">
                       <SliderFilledTrack bg="brand.600" />
@@ -167,7 +173,7 @@ function RightDrawer({ applyFilters }) {
                     </Tooltip>
                   </Slider>
                 </Box>
-                <Divider borderColor="brand.400" my={1} />
+                <Divider borderColor="brand.400" my={0.5} />
                 {/* Telescope & Diameter Slider */}
                 <Box>
                   <Text align="center" fontSize="sm" color="brand.400">
@@ -179,7 +185,8 @@ function RightDrawer({ applyFilters }) {
                     max={24.5}
                     step={0.1}
                     onChange={(value) => setTelescopeDiameter(value)}
-                    my={2}
+                    mt={2}
+                    mb={1}
                   >
                     <SliderTrack bg="brand.700" height="8px">
                       <SliderFilledTrack bg="brand.600" />
@@ -193,15 +200,15 @@ function RightDrawer({ applyFilters }) {
                   </Slider>
                   <Select
                     placeholder="Select Wavelength"
-                    fontSize="md"
+                    fontSize="sm"
                     value={wavelength}
                     onChange={(e) => setWavelength(e.target.value)}
                     bg="brand.600"
                     color="white"
                     borderColor="brand.700"
-                    mb={2}
+                    mb={1}
                     padding={0}
-                    h="30px"
+                    h="20px"
                     focusBorderColor="brand.500"
                   >
                     <option value="0.1">Far UV: 0.1 – 0.2 µm</option>
@@ -223,7 +230,7 @@ function RightDrawer({ applyFilters }) {
                     <option value="100">T-band: 100 – 300 µm</option>
                   </Select>
                 </Box>
-                <Divider borderColor="brand.400" my={1} />
+                <Divider borderColor="brand.400" my={0.5} />
                 <Box>
                   <Text align="center" fontSize="sm" color="brand.400">
                     Earth Habitability Score
@@ -234,7 +241,7 @@ function RightDrawer({ applyFilters }) {
                     max={1}
                     step={0.01}
                     onChange={(value) => setEsi(value)}
-                    my={2}
+                    mt={2}
                   >
                     <SliderTrack bg="brand.700" height="8px">
                       <SliderFilledTrack bg="brand.600" />
@@ -244,22 +251,22 @@ function RightDrawer({ applyFilters }) {
                     </Tooltip>
                   </Slider>
                 </Box>
-                <Divider borderColor="brand.400" my={1} />
+                <Divider borderColor="brand.400" my={0.5} />
                 <Box>
                   <Text align="center" fontSize="sm" color="brand.400" mb={2}>
                     Discovery Method
                   </Text>
                   <Select
                     placeholder="Select Discovery Method"
-                    fontSize="md"
+                    fontSize="sm"
                     value={discoveryMethod}
                     onChange={(e) => setDiscoveryMethod(e.target.value)}
                     bg="brand.600"
                     color="white"
                     borderColor="brand.700"
-                    mb={2}
+                    mb={1}
                     padding={0}
-                    h="30px"
+                    h="20px"
                     focusBorderColor="brand.500"
                   >
                     <option value="Microlensing">Microlensing</option>
@@ -288,20 +295,39 @@ function RightDrawer({ applyFilters }) {
                     color={"brand.700"}
                     backgroundColor={"brand.500"}
                     onClick={handleApplyFilters}
-                    fontSize={"md"}
+                    fontSize={"sm"}
+                    width="100%"
                   >
                     Apply
                   </Button>
                   <Button
-                    fontSize={"md"}
+                    fontSize={"sm"}
                     color={"brand.700"}
                     backgroundColor={"brand.500"}
                     onClick={handleReset}
+                    width="100%"
                   >
                     Reset
                   </Button>
                 </HStack>
               </VStack>
+              <Divider borderColor="brand.500" my={2} />
+              <Box>
+                <Text align="center" fontSize="sm" color="brand.400" mb={2}>
+                  Show Host Stars
+                </Text>
+                <HStack justifyContent="center">
+                  <Text color="white">Hide</Text>
+                  <Switch
+                    size="md"
+                    bg="brand.700" // Background color when unchecked
+                    colorScheme="brand" // Use your custom 'brand' color scheme for checked state
+                    isChecked={showHostStars}
+                    onChange={handleToggleHostStars}
+                  />
+                  <Text color="white">Show</Text>
+                </HStack>
+              </Box>
 
               {/* Triangle button inside drawer */}
               <Box

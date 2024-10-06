@@ -11,6 +11,7 @@ function MainPage() {
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] = useState(false);
   const [exoplanetCount, setExoplanetCount] = useState(0);
   const [hostStarCount, setHostStarCount] = useState(0);
+  const [showHostStars, setShowHostStars] = useState(true);
 
   useEffect(() => {
     // Fetch initial data (ungrouped)
@@ -39,6 +40,10 @@ function MainPage() {
 
       return acc;
     }, {});
+  };
+
+  const handleToggleHostStars = (value) => {
+    setShowHostStars(value); // Update the host star visibility state
   };
 
   const updateCounts = (groupedData) => {
@@ -100,8 +105,14 @@ function MainPage() {
         />
       )}
       <LeftDrawer onToggle={handleDrawerToggle} />
-      <ExoplanetVisualization data={filteredData} />
-      <RightDrawer applyFilters={applyFilters} />
+      <ExoplanetVisualization
+        data={filteredData}
+        showHostStars={showHostStars}
+      />
+      <RightDrawer
+        applyFilters={applyFilters}
+        onToggleHostStars={handleToggleHostStars}
+      />
       <Box
         position="absolute"
         top="10px"

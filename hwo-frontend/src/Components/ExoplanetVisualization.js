@@ -7,7 +7,7 @@ import Sun from "./Sun";
 import ControlPanel from "./ControlPanel";
 import { Text } from "@react-three/drei";
 
-function ExoplanetVisualization({ data }) {
+function ExoplanetVisualization({ data, showHostStars }) {
   const [zoomValue, setZoomValue] = useState(2900);
   const [rotateXValue, setRotateXValue] = useState(-0);
   const [rotateYValue, setRotateYValue] = useState(0);
@@ -128,7 +128,7 @@ function ExoplanetVisualization({ data }) {
           )
           .map((system, systemIndex) => (
             <React.Fragment key={systemIndex}>
-              <HostStar system={system} />
+              {showHostStars && <HostStar system={system} />}
               {system.exoplanets.map((planet, planetIndex) => (
                 <Exoplanet
                   key={`${system.starData.hostname}-${planetIndex}`}
