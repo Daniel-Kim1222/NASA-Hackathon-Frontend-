@@ -188,7 +188,7 @@ function LeftDrawer({ onToggle }) {
               <Box width="70%" pr={5}>
                 <img
                   src={`${process.env.PUBLIC_URL}/assets/images/team.png`}
-                  alt="Group Photo"
+                  alt="Group"
                   style={{
                     filter: "grayscale(100%)",
                     width: "100%",
@@ -204,7 +204,11 @@ function LeftDrawer({ onToggle }) {
                 />
               </Box>
             </Box>
-            <Text color="brand.400" fontSize="15px">
+            <Text
+              color="brand.400"
+              fontSize="20px"
+              fontFamily={"Avenir, sans-serif"}
+            >
               We are Team Grit Force, a group of passionate and determined
               students ready to take on the NASA Space Apps Challenge. Our team
               consists of six members, each bringing unique skills to the
