@@ -21,11 +21,11 @@ import {
 function RightDrawer({ applyFilters }) {
   const [isOpen, setIsOpen] = useState(false);
   // State for each filter
-  const [maxDistance, setMaxDistance] = useState(null);
+  const [maxDistance, setMaxDistance] = useState(0);
   const [wavelength, setWavelength] = useState("");
-  const [esi, setEsi] = useState(null);
+  const [esi, setEsi] = useState(0);
   const [discoveryMethod, setDiscoveryMethod] = useState("");
-  const [telescopeDiameter, setTelescopeDiameter] = useState(null);
+  const [telescopeDiameter, setTelescopeDiameter] = useState(0);
   const [shouldReset, setShouldReset] = useState(false);
 
   useEffect(() => {
@@ -36,10 +36,10 @@ function RightDrawer({ applyFilters }) {
   }, [maxDistance, telescopeDiameter, wavelength, shouldReset]);
 
   const handleReset = () => {
-    setMaxDistance(null);
-    setTelescopeDiameter(null);
+    setMaxDistance(0);
+    setTelescopeDiameter(0);
     setWavelength("");
-    setEsi(null);
+    setEsi(0);
     setDiscoveryMethod("");
     setShouldReset(true);
   };
@@ -53,20 +53,19 @@ function RightDrawer({ applyFilters }) {
   const handleApplyFilters = async () => {
     const payload = {};
 
-    if (maxDistance !== null) payload.max_distance = maxDistance;
-    if (telescopeDiameter !== null)
-      payload.telescope_diameter = telescopeDiameter;
+    if (maxDistance === 0) payload.max_distance = maxDistance;
+    if (telescopeDiameter === 0) payload.telescope_diameter = telescopeDiameter;
     if (wavelength !== "") payload.wavelength = parseFloat(wavelength);
-    if (esi !== null) payload.esi_threshold = esi;
+    if (esi === 0) payload.esi_threshold = esi;
     if (discoveryMethod !== "") payload.discovery_method = discoveryMethod;
 
     // If all filters are null, default max_distance to 8600
     if (
-      maxDistance === null &&
-      wavelength === null &&
-      esi === null &&
-      discoveryMethod === null &&
-      telescopeDiameter === null
+      maxDistance === 0 &&
+      wavelength === "" &&
+      esi === 0 &&
+      discoveryMethod === "" &&
+      telescopeDiameter === 0
     ) {
       payload.max_distance = 8600;
     }
@@ -152,7 +151,7 @@ function RightDrawer({ applyFilters }) {
                     Maximum Distance(parcecs)
                   </Text>
                   <Slider
-                    defaultValue={0}
+                    value={maxDistance}
                     min={0}
                     max={8500}
                     step={25}
@@ -174,7 +173,7 @@ function RightDrawer({ applyFilters }) {
                     Telescope Diameter(m) & Wavelength(µm)
                   </Text>
                   <Slider
-                    defaultValue={0.1}
+                    value={telescopeDiameter}
                     min={0}
                     max={24.5}
                     step={0.1}
@@ -229,7 +228,7 @@ function RightDrawer({ applyFilters }) {
                     Earth Habitability Score
                   </Text>
                   <Slider
-                    defaultValue={0}
+                    value={esi}
                     min={0.0}
                     max={1}
                     step={0.01}
