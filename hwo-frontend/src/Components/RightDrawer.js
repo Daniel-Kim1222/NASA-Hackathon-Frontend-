@@ -15,7 +15,7 @@ import {
   Tooltip,
   HStack,
   Select,
-  Flex,
+  Divider,
 } from "@chakra-ui/react";
 
 function RightDrawer({ applyFilters }) {
@@ -39,7 +39,9 @@ function RightDrawer({ applyFilters }) {
     setMaxDistance(null);
     setTelescopeDiameter(null);
     setWavelength("");
-    setShouldReset(true); // Set the flag to true to trigger the effect
+    setEsi(null);
+    setDiscoveryMethod("");
+    setShouldReset(true);
   };
 
   // Toggle Drawer
@@ -56,7 +58,7 @@ function RightDrawer({ applyFilters }) {
       payload.telescope_diameter = telescopeDiameter;
     if (wavelength !== "") payload.wavelength = parseFloat(wavelength);
     if (esi !== null) payload.esi_threshold = esi;
-    if (discoveryMethod !== null) payload.discovery_method = discoveryMethod;
+    if (discoveryMethod !== "") payload.discovery_method = discoveryMethod;
 
     // If all filters are null, default max_distance to 8600
     if (
@@ -165,6 +167,7 @@ function RightDrawer({ applyFilters }) {
                     </Tooltip>
                   </Slider>
                 </Box>
+                <Divider borderColor="brand.400" my={1} />
                 {/* Telescope & Diameter Slider */}
                 <Box>
                   <Text align="center" fontSize="sm" color="brand.400">
@@ -218,6 +221,66 @@ function RightDrawer({ applyFilters }) {
                     <option value="16.0">Q-band: 16.0 – 20.0 µm</option>
                     <option value="30">S-band: 30 – 100 µm</option>
                     <option value="100">T-band: 100 – 300 µm</option>
+                  </Select>
+                </Box>
+                <Divider borderColor="brand.400" my={1} />
+                <Box>
+                  <Text align="center" fontSize="sm" color="brand.400">
+                    Earth Habitability Score
+                  </Text>
+                  <Slider
+                    defaultValue={0}
+                    min={0.0}
+                    max={1}
+                    step={0.01}
+                    onChange={(value) => setEsi(value)}
+                    my={2}
+                  >
+                    <SliderTrack bg="brand.700" height="8px">
+                      <SliderFilledTrack bg="brand.600" />
+                    </SliderTrack>
+                    <Tooltip label={`ESI: ${esi}`} hasArrow>
+                      <SliderThumb boxSize={4} bg="brand.500" />
+                    </Tooltip>
+                  </Slider>
+                </Box>
+                <Divider borderColor="brand.400" my={1} />
+                <Box>
+                  <Text align="center" fontSize="sm" color="brand.400" mb={2}>
+                    Discovery Method
+                  </Text>
+                  <Select
+                    placeholder="Select Discovery Method"
+                    fontSize="md"
+                    value={discoveryMethod}
+                    onChange={(e) => setDiscoveryMethod(e.target.value)}
+                    bg="brand.600"
+                    color="white"
+                    borderColor="brand.700"
+                    mb={2}
+                    padding={0}
+                    h="30px"
+                    focusBorderColor="brand.500"
+                  >
+                    <option value="Microlensing">Microlensing</option>
+                    <option value="Transit">Transit</option>
+                    <option value="Radial Velocity">Radial Velocity</option>
+                    <option value="Eclipse Timing Variations">
+                      Eclipse Timing Variations
+                    </option>
+                    <option value="Imaging">Imaging</option>
+                    <option value="Astrometry">Astrometry</option>
+                    <option value="Transit Timing Variations">
+                      Transit Timing Variations
+                    </option>
+                    <option value="Orbital Brightness Modulation">
+                      Orbital Brightness Modulation
+                    </option>
+                    <option value="Pulsar Timing">Pulsar Timing</option>
+                    <option value="Disk Kinematics">Disk Kinematics</option>
+                    <option value="Pulsation Timing Variations">
+                      Pulsation Timing Variations
+                    </option>
                   </Select>
                 </Box>
                 <HStack w="100%">
