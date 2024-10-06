@@ -206,7 +206,7 @@ function LeftDrawer({ onToggle }) {
             </Box>
             <Text
               color="brand.400"
-              fontSize="20px"
+              fontSize="15px"
               fontFamily={"Avenir, sans-serif"}
             >
               We are Team Grit Force, a group of passionate and determined
