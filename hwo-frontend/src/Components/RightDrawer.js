@@ -24,7 +24,7 @@ function RightDrawer({ applyFilters }) {
   const [maxDistance, setMaxDistance] = useState(null);
   const [wavelength, setWavelength] = useState("");
   const [esi, setEsi] = useState(null);
-  const [discoveryMethod, setDiscoveryMethod] = useState(null);
+  const [discoveryMethod, setDiscoveryMethod] = useState("");
   const [telescopeDiameter, setTelescopeDiameter] = useState(null);
   const [shouldReset, setShouldReset] = useState(false);
 
