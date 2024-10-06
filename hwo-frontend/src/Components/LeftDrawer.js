@@ -96,9 +96,14 @@ function LeftDrawer({ onToggle }) {
                   fontSize="xl"
                   fontWeight="bold"
                   color={
-                    selectedSection === "intro" ? "brand.600" : "brand.400"
+                    selectedSection === "intro" ? "brand.400" : "brand.400"
                   }
-                  onClick={() => handleSectionClick("intro")}
+                  onClick={() =>
+                    window.open(
+                      "https://vimeo.com/1016728499?share=copy#t=0",
+                      "_blank"
+                    )
+                  }
                   cursor="pointer"
                 >
                   INTRO
@@ -117,17 +122,22 @@ function LeftDrawer({ onToggle }) {
                   ABOUT US
                 </Text>
 
-                {/* References */}
+                {/* Analysis */}
                 <Text
                   fontSize="xl"
                   fontWeight="bold"
                   color={
-                    selectedSection === "references" ? "brand.600" : "brand.400"
+                    selectedSection === "analysis" ? "brand.400" : "brand.400"
                   }
-                  onClick={() => handleSectionClick("references")}
+                  onClick={() =>
+                    window.open(
+                      "https://colab.research.google.com/drive/1KnbWxgLU29FuTS-nZbDjtWaGnbdAa8y7?usp=sharing",
+                      "_blank"
+                    )
+                  }
                   cursor="pointer"
                 >
-                  REFERENCES
+                  ANALYSIS
                 </Text>
               </VStack>
               <Box
