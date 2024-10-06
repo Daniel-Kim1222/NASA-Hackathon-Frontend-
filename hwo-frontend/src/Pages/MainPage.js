@@ -3,11 +3,14 @@ import React, { useState, useEffect } from "react";
 import ExoplanetVisualization from "../Components/ExoplanetVisualization";
 import LeftDrawer from "../Components/LeftDrawer";
 import RightDrawer from "../Components/RightDrawer";
+import { Box } from "@chakra-ui/react";
 
 function MainPage() {
   const [data, setData] = useState({});
   const [filteredData, setFilteredData] = useState([]);
   const [isLeftDrawerOpen, setIsLeftDrawerOpen] = useState(false);
+  const [exoplanetCount, setExoplanetCount] = useState(0);
+  const [hostStarCount, setHostStarCount] = useState(0);
 
   useEffect(() => {
     // Fetch initial data (ungrouped)
@@ -17,6 +20,7 @@ function MainPage() {
         setData(data); // Store the raw data
         const groupedData = groupByHostname(data); // Group the initial data by hostname
         setFilteredData(groupedData); // Store grouped data
+        updateCounts(groupedData);
       })
       .catch((err) => console.error("Error fetching data:", err));
   }, []);
@@ -37,6 +41,21 @@ function MainPage() {
     }, {});
   };
 
+  const updateCounts = (groupedData) => {
+    // Calculate the number of host stars (keys of groupedData)
+    const hostStarCount = Object.keys(groupedData).length;
+
+    // Calculate the number of exoplanets by summing the length of each exoplanet array
+    const exoplanetCount = Object.values(groupedData).reduce(
+      (total, star) => total + star.exoplanets.length,
+      0
+    );
+
+    // Update state with the counts
+    setHostStarCount(hostStarCount);
+    setExoplanetCount(exoplanetCount);
+  };
+
   // Function to apply filters (passed to RightDrawer)
   const applyFilters = (result) => {
     // Parse the filtered_data field from the result
@@ -55,6 +74,7 @@ function MainPage() {
 
     // Update the filtered data
     setFilteredData(groupedData);
+    updateCounts(groupedData);
   };
 
   // Handle the LeftDrawer state to show/hide logo
@@ -82,6 +102,21 @@ function MainPage() {
       <LeftDrawer onToggle={handleDrawerToggle} />
       <ExoplanetVisualization data={filteredData} />
       <RightDrawer applyFilters={applyFilters} />
+      <Box
+        position="absolute"
+        top="10px"
+        left="50%"
+        transform="translateX(-50%)"
+        zIndex="1000"
+        color="white"
+        bg="transparent"
+        p="10px"
+        borderRadius="md"
+        fontSize="18px"
+        textAlign="center"
+      >
+        Host Stars: {hostStarCount} | Exoplanets: {exoplanetCount}
+      </Box>
     </div>
   );
 }
