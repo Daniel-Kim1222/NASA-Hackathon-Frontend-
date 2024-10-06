@@ -2,6 +2,7 @@
   "name": "hwo-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Daniel-Kim1222.github.io/NASA-Hackathon-Frontend-/",
   "dependencies": {
     "@chakra-ui/react": "^2.10.1",
     "@fontsource/press-start-2p": "^5.1.0",
