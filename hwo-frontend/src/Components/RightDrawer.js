@@ -51,12 +51,13 @@ function RightDrawer({ applyFilters }) {
 
   // Handle API call to apply filters
   const handleApplyFilters = async () => {
+    console.log(maxDistance);
     const payload = {};
 
-    if (maxDistance === 0) payload.max_distance = maxDistance;
-    if (telescopeDiameter === 0) payload.telescope_diameter = telescopeDiameter;
+    if (maxDistance !== 0) payload.max_distance = maxDistance;
+    if (telescopeDiameter !== 0) payload.telescope_diameter = telescopeDiameter;
     if (wavelength !== "") payload.wavelength = parseFloat(wavelength);
-    if (esi === 0) payload.esi_threshold = esi;
+    if (esi !== 0) payload.esi_threshold = esi;
     if (discoveryMethod !== "") payload.discovery_method = discoveryMethod;
 
     // If all filters are null, default max_distance to 8600
